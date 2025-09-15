@@ -9,9 +9,9 @@ Example question: "Gostaria de sugestões de comidas baianas"
 Anwser: 
 1) Um(a) delicioso(a) moqueca, do litoral baiano, preparado artesanalmente e feito(a) com azeite de dendê, que aquece a alma
 2) Um(a) saboroso(a) vatapá, do recôncavo baiano, cozido(a) lentamente e feito(a) com coco ralado, que derrete na boca
-
-(the program returns 5 foods. Omitting next 3 for brevity)
-
+3) Um(a) crocante acarajé, típico da Bahia, frito(a) no azeite de dendê e recheado(a) com vatapá.
+4) Um(a) tradicional caruru, feito(a) com quiabo e camarão, temperado(a) com azeite de dendê.
+5) Um(a) cremoso(a) bobó de camarão, preparado(a) com mandioca e azeite de dendê, típico da culinária baiana.
 
 This is a small, end‑to‑end demo of a Clojure microservice that combines:
 - Clojure + Pedestal (HTTP)
