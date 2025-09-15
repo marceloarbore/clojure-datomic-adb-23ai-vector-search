@@ -1,0 +1,56 @@
+# Clojure/Leiningen
+/target
+/classes
+/checkouts
+profiles.clj
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+/.lein-*
+/.nrepl-port
+/.prepl-port
+.lein-failures
+
+# IDE/Editor files
+/.calva/
+/.vscode/
+/.idea/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+/logs/
+
+# Environment/Secrets
+.env
+.env.local
+.env.*.local
+secrets.edn
+config/local.edn
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Mercurial (if used)
+.hgignore
+.hg/
+
+# Git
+.git/
