@@ -2,7 +2,7 @@
 
 ## What this demo is
 
-This microservice receives a question about food and returns the 5 most-likely foods from the database (based on similarity search).
+This microservice receives a question about food and returns the 5 most-likely foods from the database (based on similarity search from Oracle 23ai).
 
 Example question: "comida baiana com dende"
 
