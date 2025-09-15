@@ -53,8 +53,8 @@ lein run
   ],
   "count": 5
 }
+```
 
-------
 ## How to initialize it
 
 ### Prerequisites
