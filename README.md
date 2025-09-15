@@ -138,3 +138,8 @@ Open a REPL to load a small demo dataset:
 - Oracle Instant Client/JDBC must be installed
 - Port `8080` must be free
 
+## References
+- I followed tutorials and had help from several people, so thank you! Here I mention some:
+- https://scicloj.github.io/clojure-data-tutorials/projects/ml/llm/vectorstore.html
+- https://medium.com/oracledevs/retrieval-augmented-generation-rag-with-spring-ai-oracle-database-23ai-and-openai-61281b96d18a
+
