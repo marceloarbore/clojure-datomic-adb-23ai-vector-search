@@ -116,22 +116,6 @@ lein repl
 lein run
 ```
 
-## Optional: seed demo data
-
-Open a REPL to load a small demo dataset:
-```clojure
-(require '[clojure-datomic-adb-23ai-vector-search.dbconf :as db])
-(def cfg (db/make-config))
-(def uris (db/build-uris cfg))
-(db/ensure-datomic-db-exists! (:datomic-uri uris))
-(def conn (db/connect-datomic! (:datomic-uri uris)))
-(def pds (db/oracle-pool-data-source! {:jdbc-url (:jdbc-url uris)
-                                       :db-username (:db-username cfg)
-                                       :db-password (:db-password cfg)}))
-(def store (db/oracle-embedding-store! pds (:datomic-db-name cfg)))
-(db/populate-datomic-oracle-db! conn store (db/make-food-descriptions 200))
-```
-
 ## How it works (very short)
 - `/food` handler embeds your query, searches Oracle Vector Store, gets top matches
 - It looks up details in Datomic (stored on Oracle via SQL storage)
