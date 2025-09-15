@@ -5,9 +5,11 @@
 This microservice receives a question about food and returns the 5 most-likely foods from the database (based on similarity search).
 
 Example question: "comida baiana com dende"
+
 Anwser: 
 1) Um(a) delicioso(a) moqueca, do litoral baiano, preparado artesanalmente e feito(a) com azeite de dendê, que aquece a alma
 2) Um(a) saboroso(a) vatapá, do recôncavo baiano, cozido(a) lentamente e feito(a) com coco ralado, que derrete na boca
+
 (the program returns 5 foods. Omitting next 3 for brevity)
 
 This is a small, end‑to‑end demo of a Clojure microservice that combines:
@@ -43,11 +45,13 @@ lein run
   "query": "comida baiana com dende",
   "results": [
     { "id": 17, "name": "moqueca", "description": "Um(a) delicioso(a) moqueca, do litoral baiano, preparado artesanalmente e feito(a) com azeite de dendê, que aquece a alma.", "score": 0.86 },
-    { "id": 203, "name": "vatapá",  "description": "Um(a) saboroso(a) vatapá, do recôncavo baiano, cozido(a) lentamente e feito(a) com coco ralado, que derrete na boca.", "score": 0.81 }
+    { "id": 203, "name": "vatapá",  "description": "Um(a) saboroso(a) vatapá, do recôncavo baiano, cozido(a) lentamente e feito(a) com coco ralado, que derrete na boca.", "score": 0.81 },
+    { "id": 42, "name": "acarajé", "description": "Um(a) crocante acarajé, típico da Bahia, frito(a) no azeite de dendê e recheado(a) com vatapá.", "score": 0.78 },
+    { "id": 58, "name": "caruru", "description": "Um(a) tradicional caruru, feito(a) com quiabo e camarão, temperado(a) com azeite de dendê.", "score": 0.75 },
+    { "id": 99, "name": "bobó de camarão", "description": "Um(a) cremoso(a) bobó de camarão, preparado(a) com mandioca e azeite de dendê, típico da culinária baiana.", "score": 0.73 }
   ],
-  "count": 2
+  "count": 5
 }
-```
 
 ## How to initialize it
 
