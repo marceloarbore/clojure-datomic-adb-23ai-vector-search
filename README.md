@@ -5,6 +5,7 @@
 This microservice receives a question about food and returns the 5 most-likely foods from the database (based on similarity search).
 
 Example question: "comida baiana com dende"
+
 Anwser: 
 1) Um(a) delicioso(a) moqueca, do litoral baiano, preparado artesanalmente e feito(a) com azeite de dendê, que aquece a alma
 2) Um(a) saboroso(a) vatapá, do recôncavo baiano, cozido(a) lentamente e feito(a) com coco ralado, que derrete na boca
