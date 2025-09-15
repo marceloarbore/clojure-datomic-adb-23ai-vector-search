@@ -12,6 +12,7 @@ Anwser:
 
 (the program returns 5 foods. Omitting next 3 for brevity)
 
+
 This is a small, end‑to‑end demo of a Clojure microservice that combines:
 - Clojure + Pedestal (HTTP)
 - Datomic using SQL storage on Oracle
@@ -52,6 +53,7 @@ lein run
   ],
   "count": 5
 }
+
 
 ## How to initialize it
 
