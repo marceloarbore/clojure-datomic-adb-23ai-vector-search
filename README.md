@@ -2,7 +2,7 @@
 
 ## What this demo is
 
-This microservice receives a question about food and returns the 5 most-likely foods from the database (based on similarity search from Oracle 23ai).
+This microservice receives a question about food and returns the 5 most-likely foods from the datomic db (based on similarity search from Oracle Autonomous 23ai).
 
 Example question: "Gostaria de sugestões de comidas baianas"
 
@@ -114,22 +114,6 @@ lein repl
 3. **Exit REPL and start the service:**
 ```bash
 lein run
-```
-
-## Optional: seed demo data
-
-Open a REPL to load a small demo dataset:
-```clojure
-(require '[clojure-datomic-adb-23ai-vector-search.dbconf :as db])
-(def cfg (db/make-config))
-(def uris (db/build-uris cfg))
-(db/ensure-datomic-db-exists! (:datomic-uri uris))
-(def conn (db/connect-datomic! (:datomic-uri uris)))
-(def pds (db/oracle-pool-data-source! {:jdbc-url (:jdbc-url uris)
-                                       :db-username (:db-username cfg)
-                                       :db-password (:db-password cfg)}))
-(def store (db/oracle-embedding-store! pds (:datomic-db-name cfg)))
-(db/populate-datomic-oracle-db! conn store (db/make-food-descriptions 200))
 ```
 
 ## How it works (very short)
