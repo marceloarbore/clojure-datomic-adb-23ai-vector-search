@@ -8,7 +8,7 @@
    [dev.langchain4j.store.embedding.oracle OracleEmbeddingStore]
    [dev.langchain4j.store.embedding.oracle CreateOption]
    [dev.langchain4j.store.embedding EmbeddingSearchRequest]
-   [oracle.ucp.jdbc PoolDataSource PoolDataSourceFactory]))
+   [oracle.ucp.jdbc PoolDataSourceFactory]))
 
 ;; =============================================================================
 ;; Configuration and URI builders (pure where possible)
@@ -27,7 +27,7 @@
            :db-username     (or (System/getenv "ORACLE_DB_USER") "datomic")
            :db-password     (or (System/getenv "ORACLE_DB_PASSWORD") "Oracle4Developers")
            :tns-admin       (or (System/getenv "TNS_ADMIN") "C:/marbore/Oracle/code/Wallet_ladtestazure")
-           :datomic-db-name (or (System/getenv "DATOMIC_DB_NAME") "foodsid")}
+           :datomic-db-name (or (System/getenv "DATOMIC_DB_NAME") "foodsid300")}
           overrides)))
 
 ;; build-uris
@@ -146,9 +146,9 @@
 ;; Flow: transact a single entity
 ;; Purity: impure (writes to Datomic)
 ;; Return: tx-report
-(defn insert-datomic!
-  [conn food-item]
-  @(d/transact conn [food-item]))
+;;(defn insert-datomic!
+;;  [conn food-item]
+;;  @(d/transact conn [food-item]))
 
 
 ;; search-datomic-by-id
@@ -188,32 +188,56 @@
 ;; Flow: generate random Brazilian food descriptions dataset
 ;; Purity: impure due to randomness; pass a seed if determinism is required
 ;; Return: tablecloth dataset {:food-id :food-name :food-description}
-(defn make-food-descriptions
+(defn make-food-dataset
   [n]
-  (let [food-items ["feijoada" "moqueca" "acarajé" "vatapá" "escondidinho" "arroz carreteiro"
-                    "bobó de camarão" "galinhada" "dobradinha" "farofa" "tacacá" "carne de sol"
-                    "baião de dois" "sarapatel" "moela" "rabada" "picadinho" "moqueca capixaba"
-                    "arroz de pato" "arroz de marisco"]
+  (let [food-items ["feijoada" "arroz com feijão" "farofa" "macarronada" "lasanha" "frango assado"
+                    "bife acebolado" "estrogonofe" "moqueca" "escondidinho" "arroz carreteiro"
+                    "galinhada" "dobradinha" "picadinho" "rabada" "moela" "carne de panela"
+                    "arroz de forno" "salada de maionese" "tutu de feijão" "cuscuz" "empadão"
+                    "pão de queijo" "pastel" "coxinha" "quibe" "esfiha" "torta salgada"
+                    "bolinho de chuva" "bolinho de bacalhau" "arroz de frango" "arroz de carne"
+                    "arroz de legumes" "arroz de camarão" "arroz de peixe" "arroz de marisco"
+                    "arroz de polvo" "arroz tropeiro" "frango com quiabo" "carne louca"
+                    "costela assada" "linguiça assada" "baião de dois" "carne de sol"
+                    "moqueca de peixe" "moqueca de camarão" "bobó de camarão" "bobó de frango"
+                    "torta de frango" "torta de legumes" "torta de sardinha" "empada de frango"
+                    "empada de palmito" "empada de queijo" "empada de carne" "empada de camarão"
+                    "empadão de frango" "empadão de carne seca" "empadão de queijo"
+                    "empadão de milho" "empadão de palmito" "empadão de camarão"
+                    "empadão de bacalhau" "empadão de frango com catupiry" "empadão de frango com milho"
+                    "empadão de frango com queijo" "empadão de frango com presunto"
+                    "empadão de frango com bacon" "empadão de frango com ervilha"
+                    "empadão de frango com cenoura" "empadão de frango com batata"
+                    "empadão de frango com tomate" "empadão de frango com cebola"
+                    "empadão de frango com pimentão" "empadão de frango com azeitona"
+                    "empadão de frango com requeijão" "empadão de frango com creme de leite"
+                    "empadão de frango com milho verde" "empadão de frango com ervas"
+                    "empadão de frango com curry" "empadão de frango com mostarda"
+                    "empadão de frango com maionese"]
         adjectives ["delicioso(a)" "apetitoso(a)" "saboroso(a)" "divino(a)" "excelente(a)"
                     "suculento(a)" "temperado(a)" "cremoso(a)" "perfeito(a)" "esplêndido(a)"
                     "delicioso(a)" "apetitoso(a)" "saboroso(a)" "divino(a)" "excelente(a)"
                     "suculento(a)" "temperado(a)" "cremoso(a)" "perfeito(a)" "esplêndido(a)"]
-        origins ["do sertão nordestino" "das fazendas mineiras" "da Amazônia brasileira" "do litoral baiano"
-                 "das montanhas de Minas Gerais" "do interior de São Paulo" "do sul do Brasil" "do cerrado goiano"
-                 "da culinária indígena" "das tradições gaúchas" "do agreste pernambucano" "do pantanal mato-grossense"
-                 "do litoral catarinense" "do planalto central" "do recôncavo baiano" "do vale do Paraíba"
-                 "do agreste pernambucano" "do pantanal mato-grossense" "do litoral catarinense" "do planalto central"
-                 "do recôncavo baiano" "do vale do Paraíba" "do recôncavo baiano" "do vale do Paraíba"
-                 "do sertão goiano" "do interior do Paraná" "das terras capixabas" "do litoral paraense"
-                 "das serras gaúchas"]
+        origins ["da receita da vovó" "que vem sendo guardada por gerações"
+                 "do caderno de receitas da família" "com segredos passados de mãe para filha"
+                 "inspirada na mesa de domingo" "dos tempos em que tudo era feito à mão"
+                 "do livro de receitas amarelado" "de um bilhete antigo na cozinha"
+                 "criada com carinho artesanal" "aperfeiçoada ao longo dos anos"
+                 "da tradição de família" "da cozinha afetiva" "do forno da casa da infância"
+                 "de encontros de família" "da festa de aniversário de antigamente"
+                 "de um ritual de domingo" "de um costume antigo" "de uma lembrança carinhosa"
+                 "de uma história contada à mesa" "de uma herança culinária" "da sabedoria popular"
+                 "do modo caseiro" "com jeitinho de casa" "com jeito de casa de avó"
+                 "com alma artesanal" "com carinho de mãe" "com capricho artesanal"
+                 "com sabor de infância" "com memória afetiva" "com afeto em cada passo"]
         methods ["cozido(a) lentamente" "assado(a) no forno a lenha" "grelhado(a) na chapa" "grelhado(a) à perfeição"
                  "assado(a) no forno" "cozido(a) no vapor suavemente" "frito(a) rapidamente" "cozido(a) em fogo brando"
                  "assado lentamente" "preparado artesanalmente"]
         ingredients ["azeite de dendê" "farinha de mandioca" "tucupi" "castanha-do-pará"
-                     "coco ralado" "pimenta-de-cheiro" "jabuticaba" "caju" "pequi"
-                     "rapadura" "queijo coalho" "feijão preto" "banana-da-terra"
-                     "camarão seco" "erva-mate" "cupuaçu" "bacuri" "umbu" "buriti"
-                     "carne de sol" "doce de leite"]
+                     "coco ralado" "pimenta-de-cheiro" "pequi"
+                     "queijo coalho" "feijão preto" "banana-da-terra"
+                     "camarão seco" "erva-mate" "umbu" "buriti"
+                     "carne de sol" "pimentão" "alho" "cebola" "cheiro-verde" "coentro" "salsinha"]
         effects ["que deleita os sentidos" "que derrete na boca"
                  "que deixa você querendo mais" "que é um banquete para os olhos"
                  "que aquece a alma" "que explode de sabor"
@@ -328,8 +352,8 @@
   ;; =============================================================================
   ;; Complete Workflow Example: Oracle + Datomic + Vector Store
   ;; =============================================================================
-  
-;; 1. Setup connections  
+
+  ;; 1. Setup connections  
   (let [cfg (make-config)
         {:keys [jdbc-url datomic-uri]} (build-uris cfg)
         _ (ensure-datomic-db-exists! datomic-uri)
@@ -340,37 +364,33 @@
         oracle-es (oracle-embedding-store! pds (:datomic-db-name cfg))]
 
     ;; 2. Initialize and populate databases
-    (populate-datomic-oracle-db! conn-datomic oracle-es (make-food-descriptions 1000))
+    (populate-datomic-oracle-db! conn-datomic oracle-es (make-food-dataset 1000))
 
-  ;; 3. Query examples
-  (let [db (d/db conn-datomic)
-        results (d/q '[:find ?name ?description
-                       :where
-                       [?e :food/name ?name]
-                       [?e :food/description ?description]] db)]
-    (println "Query results:" (take 3 results)))
+    ;; 3. Query examples
+    (let [db (d/db conn-datomic)
+          results (d/q '[:find ?name ?description
+                         :where
+                         [?e :food/name ?name]
+                         [?e :food/description ?description]] db)]
+      (println "Query results:" (take 3 results)))
 
-  ;; Count all food descriptions in Datomic database
-  (let [db (d/db conn-datomic)
-        count-result (d/q '[:find (count ?e)
-                            :where
-                            [?e :food/description]] db)]
-    (println "Total food descriptions:" (first count-result)))
+    ;; Count all food descriptions in Datomic database
+    (let [db (d/db conn-datomic)
+          count-result (d/q '[:find (count ?e)
+                              :where
+                              [?e :food/description]] db)]
+      (println "Total food descriptions:" (first count-result)))
 
-  ;; 4. Vector store search
-  (let [query-text "comida fresca com sabores de minas gerais"
-        search-results (search-top-5-vector-store oracle-es query-text)]
-    (doseq [result search-results]
-      (println "  Score:" (:score result) "| Text:" (:text result))))
+    ;; 4. Vector store search
+    (let [query-text "comida fresca com sabores de minas gerais"
+          search-results (search-top-5-vector-store oracle-es query-text)]
+      (doseq [result search-results]
+        (println "  Score:" (:score result) "| Text:" (:text result))))
 
-  ;; 5. Combined search (vector + datomic)
-  (query-top5-food-items oracle-es conn-datomic "comidas de são paulo")
+    ;; 5. Combined search (vector + datomic)
+    (query-top5-food-items oracle-es conn-datomic "comidas de são paulo")
 
     ;; 6. Cleanup
     (.close pds)
     (d/release conn-datomic)
-    (println "Connections closed successfully"))
-
-
-
-  )
+    (println "Connections closed successfully")))

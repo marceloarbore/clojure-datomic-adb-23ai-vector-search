@@ -26,6 +26,7 @@
                        :db-password (:db-password cfg)
                        :initial-pool-size 10})
          store       (dbconf/oracle-embedding-store! pds (:datomic-db-name cfg))
+;;         gen-data    (dbconf/populate-datomic-oracle-db! conn store (dbconf/make-food-dataset 50)) ;; somente usar se precisar recriar/popular o banco datomic + embeddings (oracle)
          routes      (server/make-routes {:conn-datomic conn
                                           :oracle-embedding-store store})
          service     (server/make-service {:routes routes :port 8080 :env :prod})

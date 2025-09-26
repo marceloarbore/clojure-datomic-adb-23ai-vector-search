@@ -19,8 +19,8 @@ This is a small, end‑to‑end demo of a Clojure microservice that combines:
 - Oracle Autonomous Database Vector Search (LangChain4j `OracleEmbeddingStore`)
 
 Endpoints (open in your browser):
-- `/greet?name=World` → simple greeting
-- `/food?text=your+query` → JSON with top‑5 matches `{id,name,description,score}`
+- `/greet?name=World` → simple greeting (check service is alive)
+- `/food?text=your+query` → JSON with top‑5 food matches `{id,name,description,score}`
 
 ### What you’ll see
 - How an HTTP handler calls a vector search on Oracle, then hydrates results from Datomic
@@ -34,12 +34,12 @@ lein run
 ```
 
 2) Open in your browser
-- Greeting: `http://localhost:8080/greet?name=World`
+- Greeting: `http://localhost:8080/greet?name=World` (check service is alive)
 - Food search (Portuguese): `http://localhost:8080/food?text=comida baiana com dende"`
 - Food search (English): `http://localhost:8080/food?text="Brazilian seafood with dende"`
 
-3) You should see
-- Greeting: a plain text “Hello World!”
+3) Microservice output
+- Greeting: a plain text “Hello World!” (service is alive)
 - Food search (example)
 ```json
 {
