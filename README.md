@@ -58,8 +58,21 @@ lein run
 ## How to initialize it
 
 ### Prerequisites
+You need to set up two databases before running this demo:
+
+1. **Oracle Autonomous Database 23ai with Vector Search enabled**
+   - Create an Oracle Autonomous Database 23ai instance (OCI cloud)
+   - Ensure vector search is enabled (this feature comes pre-configured in 23ai)
+   - Download wallet files from your ADB console
+   - Oracle Instant Client + ADB Wallet (set `TNS_ADMIN` to the wallet directory)
+
+2. **Datomic Database (SQL storage on Oracle)**
+   - Install and configure Datomic Transactor
+   - Configure Datomic to use Oracle as the SQL storage backend
+   - Ensure Datomic can connect to your Oracle 23ai database
+   - Note: The demo will automatically create the Datomic database schema
+
 - Java 17+, Leiningen
-- Oracle Instant Client + ADB Wallet (set `TNS_ADMIN` to the wallet directory)
 
 ### Environment Setup
 Set these environment variables (PowerShell example):
@@ -73,6 +86,15 @@ $env:DATOMIC_DB_NAME="<datomic_db_name>"
 
 ### Database Preparation
 Before running the demo, you need to prepare both Datomic and Oracle databases:
+
+**Note on Data Generation:** 
+This demo uses an automated data generation function (`make-food-dataset`) that creates 200 Brazilian food items with rich descriptions. The generated data includes:
+- Traditional Brazilian food names
+- Detailed descriptions with cooking methods, ingredients, and cultural context
+- Vector embeddings stored in Oracle for similarity search
+- Metadata stored in Datomic for result hydration
+
+If you want to use your own data instead, you can modify the dataset generation or replace the populate calls.
 
 1. **Install dependencies and start REPL:**
 ```bash
